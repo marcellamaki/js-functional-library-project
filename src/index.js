@@ -85,9 +85,19 @@ fi = (function () {
       for (var i = 0; i < list.length; i++) {
         object[list[i]] = callback(list[i])
       }
-      var sortedValues = Object.values(object).sort();
+      var sortedValues = Object.values(object).sort(function (a, b) {
+                  if (a < b) {
+                    return -1;
+                  }
+                  if (a > b) {
+                    return 1;
+                  }
+                  return 0;
+                }
+                );
       for (var i = 0; i < sortedValues.length; i++) {
         sortedValues[i]
+        debugger
         for (var key in object) {
           if (object[key] === sortedValues[i]) {
             sortedValues[i] = key
@@ -103,7 +113,6 @@ fi = (function () {
         newArray.push(list[i][callback])
       }
         newArray.sort();
-        debugger
         for (var i = 0; i < newArray.length; i++) {
           newArray[i]
           for (var j = 0; j < list.length; j++) {
